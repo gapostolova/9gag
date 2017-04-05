@@ -1,7 +1,6 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.TreeSet;
 
 public class User {
@@ -9,11 +8,11 @@ public class User {
 	private String username;
 	private String email;
 	private String password;
-	private int userId;
+	private long userId;
 	private boolean viewNsfwContent;
 	private String profilePic;
 	private final String gender;
-	private  LocalDate dateOfBirth;
+	private LocalDate dateOfBirth;
 	private String country;
 	private String description;
 	private boolean admin;
@@ -28,8 +27,8 @@ public class User {
 	private static final int MIN_YEAR_OF_BIRTH = 1917;
 	
 	public User(String username, String email, String password, int userId, boolean nsfw, String profilePic,
-			String gender, LocalDate dateOfBirth, String country) {
-		super();
+			String gender, LocalDate dateOfBirth, String country, String description, boolean admin) {
+
 		setUsername(username);
 		setEmail(email);
 		setPassword(password);
@@ -38,6 +37,8 @@ public class User {
 		setProfilePic(profilePic);
 		setDateOfBirth(dateOfBirth);
 		setCountry(country);
+		setDescription(description);
+		setAdmin(admin);
 		
 		if(gender != null && !gender.isEmpty()){
 			this.gender = gender;
@@ -103,7 +104,7 @@ public class User {
 
 
 	
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
@@ -133,6 +134,48 @@ public class User {
 		this.admin = admin;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public boolean isViewNsfwContent() {
+		return viewNsfwContent;
+	}
+
+	public String getProfilePic() {
+		return profilePic;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
 
 }
