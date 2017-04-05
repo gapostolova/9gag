@@ -13,7 +13,7 @@ public class Gag implements Comparable<Gag> {
 	private int upvotes;
 	private TreeSet<Comment> comments;
 	//?? private boolean isVideo;
-	
+	//test
 	
 
 	public Gag(String gag, String title, int userId, int gagID, boolean nsfw, String category) {
