@@ -11,13 +11,13 @@ public class Gag implements Comparable<Gag> {
 	private boolean nsfw;
 	private String category;
 	private int upvotes;
+	private boolean isPublic;
 	private TreeSet<Comment> comments;
 	//?? private boolean isVideo;
 	//test
 	
 
-	public Gag(String gag, String title, int userId, int gagID, boolean nsfw, String category) {
-		super();
+	public Gag(String gag, String title, int userId, int gagID, boolean nsfw, String category, boolean isPublic) {
 		if(gag != null && !gag.isEmpty()){
 			this.gag = gag;
 		}
@@ -31,6 +31,7 @@ public class Gag implements Comparable<Gag> {
 			this.category = category;
 		}
 		this.comments = new TreeSet<Comment>();
+		this.isPublic = isPublic;
 	}
 	
 	public void Upvote(){
