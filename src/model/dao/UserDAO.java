@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,7 +13,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
-
+import model.Category;
 import model.Comment;
 import model.Gag;
 
@@ -64,20 +65,26 @@ public class UserDAO {
 	
 	
 	//get all gags of user with id : userId
-//	private synchronized TreeSet<Gag> usersGags(long userId){
-//		
-//		TreeSet<Gag> gags = new TreeSet<Gag>();
-//		String sql = "SELECT gag_id, content, nsfw, title, points, public, type, user_id FROM gags WHERE user_id = " + userId + ";";
-//		PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
-//		ResultSet res = st.executeQuery();
-//		
-//		while(res.next()){
-//			Gag gag = new Gag(gag, title, userId, gagID, nsfw, category, isPublic)
-//		}
-//		
-//	}
-//	
+	private synchronized TreeSet<Gag> usersGags(long userId) throws SQLException{
+		
+		TreeSet<Gag> gags = new TreeSet<Gag>();
+		String sql = "SELECT gag_id, content, nsfw, title, points, public, type, user_id FROM gags WHERE user_id = " + userId + ";";
+		PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+		ResultSet res = st.executeQuery();
+		
+		while(res.next()){
+			//add list of categories
+			Gag gag = new Gag(res.getString("content"), res.getString("title"), res.getInt("userId"), res.getInt("gag_id"), res.getBoolean("nsfw"), res.getBoolean("public"), res.getString("type"));
+			gag.setCategory(categories(gag.getGagID()));
+			gag.setComments(comments);
+			
+			
+		}
+		
+	}
 	
+	
+
 	public synchronized User getUser(String email) throws SQLException{
 		
 		if(getAllUsers().containsKey(email)){
@@ -86,6 +93,22 @@ public class UserDAO {
 		return null;
 	}
 	
+	private synchronized ArrayList<Category> categories(long gagID) throws SQLException{
+		
+		ArrayList<Category> category = new ArrayList<>();
+		String sql = "select categories_category_id, name from gags_in_categories join categories on(categories_category_id = category_id) where gags_gag_id=" + gagID;
+		PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+		ResultSet res = st.executeQuery();
+		while(res.next()){
+			Category cat = new Category(res.getLong("categories_category_id"), res.getString("name"));
+			category.add(cat);
+		}
+		return category;
+		
+
+	}
+	
+//	private synchronized TreeSet<E>
 	
 	
 	
