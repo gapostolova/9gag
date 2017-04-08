@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.dao.UserDAO;
 import model.UserManager;
 
 @WebServlet("/login")
@@ -18,14 +21,23 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		HttpSession session = request.getSession();
 		
-		if(!UserDAO.allUsers.containsKey(email)) {
-			response.sendRedirect("register.jsp");
+		try {
+			if(!UserDAO.getInstance().getAllUsers().containsKey(email)) {
+				response.sendRedirect("register.jsp");
+			}
+		} catch (SQLException e) {
+			//error page
 		}
 		
 		if(UserManager.getInstance().validateLogin(email, password)) {
 			session.setAttribute("logged", true);
-			session.setAttribute("user", UserDAO.getUser(email));
-			response.sendRedirect("index.html");
+			try {
+				session.setAttribute("user", UserDAO.getInstance().getUser(email));
+				response.sendRedirect("index.html");
+			} catch (SQLException e) {
+				//error page
+			}
+			
 		}
 		else {
 			response.sendRedirect("login.jsp");

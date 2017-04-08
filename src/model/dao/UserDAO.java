@@ -78,7 +78,13 @@ public class UserDAO {
 //	}
 //	
 	
-	
+	public synchronized User getUser(String email) throws SQLException{
+		
+		if(getAllUsers().containsKey(email)){
+			return getAllUsers().get(email);
+		}
+		return null;
+	}
 	
 	
 	
