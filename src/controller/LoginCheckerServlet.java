@@ -19,7 +19,7 @@ public class LoginCheckerServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String url = "";
 		
-		if((boolean)session.getAttribute("logged")) 
+		if(session.getAttribute("logged") != null || (boolean)session.getAttribute("logged")) 
 			url = request.getRequestURL().toString();
 		else
 			url = "login.jsp";
