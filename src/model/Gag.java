@@ -13,11 +13,11 @@ public class Gag implements Comparable<Gag> {
 	private int upvotes;
 	private boolean isPublic;
 	private TreeSet<Comment> comments;
-	//?? private boolean isVideo;
-	//test
+	private String type;
+	
 	
 
-	public Gag(String gag, String title, int userId, int gagID, boolean nsfw, String category, boolean isPublic) {
+	public Gag(String gag, String title, int userId, int gagID, boolean nsfw, String category, boolean isPublic, String type) {
 		if(gag != null && !gag.isEmpty()){
 			this.gag = gag;
 		}
@@ -32,6 +32,10 @@ public class Gag implements Comparable<Gag> {
 		}
 		this.comments = new TreeSet<Comment>();
 		this.isPublic = isPublic;
+		
+		if(type != null && !type.isEmpty()){
+			this.type = type;
+		}
 	}
 	
 	public void Upvote(){
@@ -46,7 +50,6 @@ public class Gag implements Comparable<Gag> {
 	
 	@Override
 	public int compareTo(Gag g) {
-		// TODO Auto-generated method stub
 		return g.gagID-this.gagID;
 	}
 }

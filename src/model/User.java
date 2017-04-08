@@ -13,21 +13,32 @@ public class User {
 	private String profilePic;
 	private final String gender;
 	private LocalDate dateOfBirth;
-	private String country;
 	private String description;
 	private boolean admin;
 	private TreeSet<Gag> gags;
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", email=" + email + ", password=" + password + ", userId=" + userId
+				+ ", viewNsfwContent=" + viewNsfwContent + ", profilePic=" + profilePic + ", gender=" + gender
+				+ ", dateOfBirth=" + dateOfBirth + ", description=" + description + ", admin=" + admin + "]";
+	}
+
+
+
+
 	private TreeSet<Video> videos;
 	
 	private static final String EMAIL_PATTERN =
 			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
+
+
 	private static final int MAX_YEAR_OF_BIRTH = 2003;
 	private static final int MIN_YEAR_OF_BIRTH = 1917;
 	
 	public User(String username, String email, String password, int userId, boolean nsfw, String profilePic,
-			String gender, LocalDate dateOfBirth, String country, String description, boolean admin) {
+			String gender, LocalDate dateOfBirth, String description, boolean admin) {
 
 		setUsername(username);
 		setEmail(email);
@@ -36,7 +47,7 @@ public class User {
 		setViewNsfwContent(nsfw);
 		setProfilePic(profilePic);
 		setDateOfBirth(dateOfBirth);
-		setCountry(country);
+		
 		setDescription(description);
 		setAdmin(admin);
 		
@@ -109,11 +120,6 @@ public class User {
 	}
 
 
-	public void setCountry(String country) {
-		if(country != null && !country.isEmpty()){
-			this.country = country;
-		}
-	}
 
 
 
@@ -166,9 +172,7 @@ public class User {
 		return dateOfBirth;
 	}
 
-	public String getCountry() {
-		return country;
-	}
+	
 
 	public String getDescription() {
 		return description;
@@ -176,6 +180,34 @@ public class User {
 
 	public boolean isAdmin() {
 		return admin;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		return result;
+	}
+
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		return true;
 	}
 
 }
