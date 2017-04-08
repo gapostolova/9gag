@@ -72,4 +72,13 @@ public class Gag implements Comparable<Gag> {
 	public int compareTo(Gag g) {
 		return g.gagID-this.gagID;
 	}
+
+	@Override
+	public String toString() {
+		return "Gag [gag=" + gag + ", title=" + title + ", userId=" + userId + ", gagID=" + gagID + ", nsfw=" + nsfw
+				+ ", category=" + category + ", upvotes=" + upvotes + ", isPublic=" + isPublic + ", comments="
+				+ comments + ", type=" + type + "]";
+	}
+	
+	
 }

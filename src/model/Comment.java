@@ -39,6 +39,14 @@ public class Comment implements Comparable<Comment> {
 	public int compareTo(Comment o) {
 		return (int) (this.gagId - o.gagId);
 	}
+
+	@Override
+	public String toString() {
+		return "Comment [userId=" + userId + ", gagId=" + gagId + ", commentId=" + commentId + ", date=" + date
+				+ ", content=" + content + ", motherCommentId=" + motherCommentId + ", upvotes=" + upvotes + "]";
+	}
+	
+	
 	
 
 }

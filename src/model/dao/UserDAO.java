@@ -22,7 +22,7 @@ import model.User;
 
 public class UserDAO {
 
-	//						Email, User
+	//							   	Email, User
 	private static ConcurrentHashMap<String, User> allUsers = new ConcurrentHashMap<>();
 	
 	private boolean dataHasChanged = false;
@@ -81,8 +81,8 @@ public class UserDAO {
 			gags.add(gag);
 		}
 		return gags;
-		
 	}
+	
 	
 	private synchronized TreeSet<Comment> comments(long userID) throws SQLException{
 		
