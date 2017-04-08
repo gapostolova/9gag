@@ -5,64 +5,150 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
+import model.Car;
+import model.Profile;
 import model.User;
+import model.Car.Brand;
+import model.Car.Color;
+import model.Car.Comfort;
+import model.Car.TypeOfCar;
+import model.Profile.Gender;
 
 public class UserDAO {
 
-	public static UserDAO instance;
+	//						Email, User
+	private static ConcurrentHashMap<String, User> allUsers = new ConcurrentHashMap<>();
+	private boolean dataHasChanged = false;
+	private static UserDAO instance;
 	
 	private UserDAO() {}
 	
 	public static synchronized UserDAO getInstance() {
-		if(instance == null)
+		if(instance == null){
 			instance = new UserDAO();
+		}
 		return instance;
 	}
 	
-	//get all users
-	public Set<User> getAllUsers() {
-		Set<User> allUsers = new HashSet<>();
-		
-		Statement statement = null;
-		ResultSet res = null;
-		
-		try {
-			statement = DBManager.getInstance().getConnection().createStatement();
-			res = statement.executeQuery("SELECT user_id, username, password, email, nsfw, profile_pic, gender, birthday, country, description, admin FROM users;");
-			while(res.next()) {
-				User user = new User(res.getString("username"), 
-						res.getString("email"), 
-						res.getString("password"), 
-						res.getInt("user_id"), 
-						res.getBoolean("nsfw"), 
-						res.getString("profile_pic"), 
-						res.getString("gender"), 
-						res.getDate("birthday").toLocalDate(), 
-						res.getString("country"),
-						res.getString("description"),
-						res.getBoolean("admin"));
-				allUsers.add(user);
-				//add gags and videos
-			}
-		} catch (SQLException e) {
-			System.out.println("Couldn't retrieve users from DB");
-		} finally {
-			try {
-				statement.close();
-				res.close();
-			} catch (SQLException e) {
-				System.out.println("Couldn't close statement or resultset.");
-			}
-			
-		}
-		
-		System.out.println("Got all users from DB");
-		
-		return Collections.unmodifiableSet(allUsers);
+	public void setDataHasChanged(boolean dataHasChanged) {
+		this.dataHasChanged = dataHasChanged;
 	}
+	
+	
+	public synchronized Map<String , User> getAllUsers() throws SQLException{
+		
+		if(allUsers.isEmpty() || dataHasChanged == true){
+			
+			String sql = "SELECT u.user_id, u.username, u.password, u.email, u.nsfw, u.profile_pic, u.gender, u.birthday, u.description, u.admin, u.is_verified, u.verification_key from users u;";
+			PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+			ResultSet res = st.executeQuery();
+			while(res.next()){
+				int isVerified = res.getInt("is_verified");
+				boolean v;
+				if (isVerified == 0)
+					v = false;
+				else v = true;
+				User user = new User(res.getString("username"), res.getString("email"), res.getString("password"), res.getInt("user_id"), res.getBoolean("nsfw"), res.getString("profile_pic"), res.getString("gender"), res.getDate("birthday").toLocalDate(), res.getString("description"), res.getBoolean("admin"));
+				
+				//add gags/videos and comments
+				
+				
+				allUsers.put(user.getEmail(), user);
+			}
+		}
+		dataHasChanged = false;
+		return Collections.unmodifiableMap(allUsers);
+	}
+	
+	
+	
+	public synchronized 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//get all users
+//	public Set<User> getAllUsers() {
+//		Set<User> allUsers = new HashSet<>();
+//		
+//		Statement statement = null;
+//		ResultSet res = null;
+//		
+//		try {
+//			statement = DBManager.getInstance().getConnection().createStatement();
+//			res = statement.executeQuery("SELECT user_id, username, password, email, nsfw, profile_pic, gender, birthday, country, description, admin FROM users;");
+//			while(res.next()) {
+//				User user = new User(res.getString("username"), 
+//						res.getString("email"), 
+//						res.getString("password"), 
+//						res.getInt("user_id"), 
+//						res.getBoolean("nsfw"), 
+//						res.getString("profile_pic"), 
+//						res.getString("gender"), 
+//						res.getDate("birthday").toLocalDate(), 
+//						res.getString("country"),
+//						res.getString("description"),
+//						res.getBoolean("admin"));
+//				allUsers.add(user);
+//				//add gags and videos
+//			}
+//		} catch (SQLException e) {
+//			System.out.println("Couldn't retrieve users from DB");
+//		} finally {
+//			try {
+//				statement.close();
+//				res.close();
+//			} catch (SQLException e) {
+//				System.out.println("Couldn't close statement or resultset.");
+//			}
+//			
+//		}
+//		
+//		System.out.println("Got all users from DB");
+//		
+//		return Collections.unmodifiableSet(allUsers);
+//	}
 	
 	//add user --- whole process should be a transaction
 	
