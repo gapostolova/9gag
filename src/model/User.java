@@ -16,13 +16,6 @@ public class User {
 	private String description;
 	private boolean admin;
 	private TreeSet<Gag> gags;
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", email=" + email + ", password=" + password + ", userId=" + userId
-				+ ", viewNsfwContent=" + viewNsfwContent + ", profilePic=" + profilePic + ", gender=" + gender
-				+ ", dateOfBirth=" + dateOfBirth + ", description=" + description + ", admin=" + admin + "]";
-	}
-
 
 
 
@@ -209,5 +202,14 @@ public class User {
 			return false;
 		return true;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", email=" + email + ", password=" + password + ", userId=" + userId
+				+ ", viewNsfwContent=" + viewNsfwContent + ", profilePic=" + profilePic + ", gender=" + gender
+				+ ", dateOfBirth=" + dateOfBirth + ", description=" + description + ", admin=" + admin + "]";
+	}
+
 
 }

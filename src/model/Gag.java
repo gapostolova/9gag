@@ -46,6 +46,10 @@ public class Gag implements Comparable<Gag> {
 		this.upvotes--;
 	}
 	
+	public void setComments(TreeSet<Comment> comments) {
+		this.comments = comments;
+	}
+	
 	public int getGagID() {
 		return gagID;
 	}

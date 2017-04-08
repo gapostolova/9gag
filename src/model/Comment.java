@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDateTime;
 import java.util.TreeSet;
 
-public class Comment {
+public class Comment implements Comparable<Comment> {
 	
 	private  int userId;
 	private int gagId;
@@ -33,6 +33,11 @@ public class Comment {
 	
 	public void Downvote(){
 		this.upvotes--;
+	}
+
+	@Override
+	public int compareTo(Comment o) {
+		return ;
 	}
 	
 
