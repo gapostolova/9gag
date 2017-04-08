@@ -38,12 +38,20 @@ public class Gag implements Comparable<Gag> {
 		this.category = new ArrayList<>();
 	}
 	
+	public int getUserId() {
+		return userId;
+	}
+	
 	public void Upvote(){
 		this.upvotes++;
 	}
 	
 	public void Downvote(){
 		this.upvotes--;
+	}
+	
+	public void addComment(Comment comment){
+		this.comments.add(comment);
 	}
 	
 	public void setComments(TreeSet<Comment> comments) {
@@ -64,4 +72,13 @@ public class Gag implements Comparable<Gag> {
 	public int compareTo(Gag g) {
 		return g.gagID-this.gagID;
 	}
+
+	@Override
+	public String toString() {
+		return "Gag [gag=" + gag + ", title=" + title + ", userId=" + userId + ", gagID=" + gagID + ", nsfw=" + nsfw
+				+ ", category=" + category + ", upvotes=" + upvotes + ", isPublic=" + isPublic + ", comments="
+				+ comments + ", type=" + type + "]";
+	}
+	
+	
 }

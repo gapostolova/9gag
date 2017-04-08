@@ -59,6 +59,7 @@ public class User {
 	
 	
 	
+	
 	public void setUsername(String username) {
 		if(username != null && !username.isEmpty()){
 			this.username = username;
@@ -202,14 +203,21 @@ public class User {
 			return false;
 		return true;
 	}
-	
-	
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", email=" + email + ", password=" + password + ", userId=" + userId
 				+ ", viewNsfwContent=" + viewNsfwContent + ", profilePic=" + profilePic + ", gender=" + gender
-				+ ", dateOfBirth=" + dateOfBirth + ", description=" + description + ", admin=" + admin + "]";
+				+ ", dateOfBirth=" + dateOfBirth + ", description=" + description + ", admin=" + admin + ", gags="
+				+ gags + "]";
 	}
+	
+	
+	
 
 
 }
