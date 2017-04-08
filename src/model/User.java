@@ -16,6 +16,16 @@ public class User {
 	private String description;
 	private boolean admin;
 	private TreeSet<Gag> gags;
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", email=" + email + ", password=" + password + ", userId=" + userId
+				+ ", viewNsfwContent=" + viewNsfwContent + ", profilePic=" + profilePic + ", gender=" + gender
+				+ ", dateOfBirth=" + dateOfBirth + ", description=" + description + ", admin=" + admin + "]";
+	}
+
+
+
+
 	private TreeSet<Video> videos;
 	
 	private static final String EMAIL_PATTERN =

@@ -13,8 +13,8 @@ public class Gag implements Comparable<Gag> {
 	private int upvotes;
 	private boolean isPublic;
 	private TreeSet<Comment> comments;
-	//?? private boolean isVideo;
-	//test
+	private boolean type;
+	
 	
 
 	public Gag(String gag, String title, int userId, int gagID, boolean nsfw, String category, boolean isPublic) {
@@ -46,7 +46,6 @@ public class Gag implements Comparable<Gag> {
 	
 	@Override
 	public int compareTo(Gag g) {
-		// TODO Auto-generated method stub
 		return g.gagID-this.gagID;
 	}
 }

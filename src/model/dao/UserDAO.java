@@ -9,16 +9,15 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
-import model.Car;
-import model.Profile;
+
+import model.Comment;
+import model.Gag;
+
 import model.User;
-import model.Car.Brand;
-import model.Car.Color;
-import model.Car.Comfort;
-import model.Car.TypeOfCar;
-import model.Profile.Gender;
+
 
 public class UserDAO {
 
@@ -50,12 +49,9 @@ public class UserDAO {
 			ResultSet res = st.executeQuery();
 			while(res.next()){
 				int isVerified = res.getInt("is_verified");
-				boolean v;
-				if (isVerified == 0)
-					v = false;
-				else v = true;
+			
 				User user = new User(res.getString("username"), res.getString("email"), res.getString("password"), res.getInt("user_id"), res.getBoolean("nsfw"), res.getString("profile_pic"), res.getString("gender"), res.getDate("birthday").toLocalDate(), res.getString("description"), res.getBoolean("admin"));
-				
+				System.out.println(user);
 				//add gags/videos and comments
 				
 				
@@ -67,8 +63,19 @@ public class UserDAO {
 	}
 	
 	
-	
-	public synchronized 
+	//get all gags of user with id : userId
+	/*private synchronized TreeSet<Gag> usersGags(long userId){
+		
+		TreeSet<Gag> gags = new TreeSet<Gag>();
+		String sql = "SELECT gag_id, content, nsfw, title, points, public, type, user_id FROM gags WHERE user_id = " + userId + ";";
+		PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+		ResultSet res = st.executeQuery();
+		
+		while(res.next()){
+			
+		}
+		
+	}*/
 	
 	
 	
@@ -165,7 +172,6 @@ public class UserDAO {
 			pst.setString(5, u.getProfilePic());
 			pst.setString(6, u.getGender());
 			pst.setDate(7, java.sql.Date.valueOf(u.getDateOfBirth()));
-			pst.setString(8, u.getCountry());
 			pst.setString(9, u.getDescription());
 			pst.setBoolean(10, u.isAdmin());
 			pst.executeUpdate();
