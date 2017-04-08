@@ -7,8 +7,8 @@ public class Gag implements Comparable<Gag> {
 	
 	private String gag;
 	private String title;
-	private int userId;
-	private int gagID;
+	private long userId;
+	private long gagID;
 	private boolean nsfw;
 	private ArrayList<Category> category;
 	private int upvotes;
@@ -18,7 +18,7 @@ public class Gag implements Comparable<Gag> {
 	
 	
 
-	public Gag(String gag, String title, int userId, int gagID, boolean nsfw, boolean isPublic, String type) {
+	public Gag(String gag, String title, long userId, long gagID, boolean nsfw, boolean isPublic, String type) {
 		if(gag != null && !gag.isEmpty()){
 			this.gag = gag;
 		}
