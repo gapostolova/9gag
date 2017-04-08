@@ -38,7 +38,7 @@ public class Gag implements Comparable<Gag> {
 		this.category = new ArrayList<>();
 	}
 	
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 	
@@ -58,7 +58,7 @@ public class Gag implements Comparable<Gag> {
 		this.comments = comments;
 	}
 	
-	public int getGagID() {
+	public long getGagID() {
 		return gagID;
 	}
 	
@@ -70,7 +70,7 @@ public class Gag implements Comparable<Gag> {
 	
 	@Override
 	public int compareTo(Gag g) {
-		return g.gagID-this.gagID;
+		return (int) (g.gagID-this.gagID);
 	}
 
 	@Override
