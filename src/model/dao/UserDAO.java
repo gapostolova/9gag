@@ -64,19 +64,19 @@ public class UserDAO {
 	
 	
 	//get all gags of user with id : userId
-	/*private synchronized TreeSet<Gag> usersGags(long userId){
-		
-		TreeSet<Gag> gags = new TreeSet<Gag>();
-		String sql = "SELECT gag_id, content, nsfw, title, points, public, type, user_id FROM gags WHERE user_id = " + userId + ";";
-		PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
-		ResultSet res = st.executeQuery();
-		
-		while(res.next()){
-			
-		}
-		
-	}*/
-	
+//	private synchronized TreeSet<Gag> usersGags(long userId){
+//		
+//		TreeSet<Gag> gags = new TreeSet<Gag>();
+//		String sql = "SELECT gag_id, content, nsfw, title, points, public, type, user_id FROM gags WHERE user_id = " + userId + ";";
+//		PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+//		ResultSet res = st.executeQuery();
+//		
+//		while(res.next()){
+//			Gag gag = new Gag(gag, title, userId, gagID, nsfw, category, isPublic)
+//		}
+//		
+//	}
+//	
 	
 	
 	
