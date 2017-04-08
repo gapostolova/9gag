@@ -24,6 +24,7 @@ public class UserDAO {
 
 	//						Email, User
 	private static ConcurrentHashMap<String, User> allUsers = new ConcurrentHashMap<>();
+	
 	private boolean dataHasChanged = false;
 	private static UserDAO instance;
 	
@@ -52,9 +53,9 @@ public class UserDAO {
 				int isVerified = res.getInt("is_verified");
 			
 				User user = new User(res.getString("username"), res.getString("email"), res.getString("password"), res.getInt("user_id"), res.getBoolean("nsfw"), res.getString("profile_pic"), res.getString("gender"), res.getDate("birthday").toLocalDate(), res.getString("description"), res.getBoolean("admin"));
-				System.out.println(user);
 				//add gags/videos and comments
-				
+				user.setGags(usersGags(user.getUserId()));
+				System.out.println(user);
 				
 				allUsers.put(user.getEmail(), user);
 			}
@@ -76,13 +77,30 @@ public class UserDAO {
 			//add list of categories
 			Gag gag = new Gag(res.getString("content"), res.getString("title"), res.getInt("userId"), res.getInt("gag_id"), res.getBoolean("nsfw"), res.getBoolean("public"), res.getString("type"));
 			gag.setCategory(categories(gag.getGagID()));
-			gag.setComments(comments);
+			gag.setComments(comments(gag.getUserId()));
 			
 			
 		}
 		
 	}
 	
+	private synchronized TreeSet<Comment> comments(long userID) throws SQLException{
+		
+		TreeSet<Comment> cmnts = new TreeSet<>();
+		
+		String sql = "select comment_id, time, description, mothership_id, points, user_id, gag_id from comments where user_id =" + userID +";";
+		PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+		ResultSet res = st.executeQuery();
+		while(res.next()){
+			java.sql.Timestamp date = res.getTimestamp("time");
+			Comment comment = new Comment(res.getLong("user_id"), res.getLong("gag_id"), res.getLong("comment_id"), date.toLocalDateTime(), res.getString("description"), res.getLong("mothership_id"));
+			cmnts.add(comment);
+		}
+		
+		return cmnts;
+		
+		
+	}
 	
 
 	public synchronized User getUser(String email) throws SQLException{
@@ -93,8 +111,7 @@ public class UserDAO {
 		return null;
 	}
 	
-	private synchronized ArrayList<Category> categories(long gagID) throws SQLException{
-		
+	private synchronized ArrayList<Category> categories(long gagID) throws SQLException{	
 		ArrayList<Category> category = new ArrayList<>();
 		String sql = "select categories_category_id, name from gags_in_categories join categories on(categories_category_id = category_id) where gags_gag_id=" + gagID;
 		PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
@@ -108,7 +125,7 @@ public class UserDAO {
 
 	}
 	
-//	private synchronized TreeSet<E>
+
 	
 	
 	

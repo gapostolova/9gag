@@ -5,17 +5,17 @@ import java.util.TreeSet;
 
 public class Comment implements Comparable<Comment> {
 	
-	private  int userId;
-	private int gagId;
-	private int commentId;
+	private  long userId;
+	private long gagId;
+	private long commentId;
 	private LocalDateTime date;
 	private String content;
-	private int motherCommentId;
+	private long motherCommentId;
 	private int upvotes;
 	
 	//?? private TreeSet<Comment> replies;
 	
-	public Comment(int userId, int gagId, int commentId, LocalDateTime date, String content, int motherCommentId) {
+	public Comment(long userId, long gagId, long commentId, LocalDateTime date, String content, long motherCommentId) {
 		super();
 		this.userId = userId;
 		this.gagId = gagId;
@@ -37,7 +37,7 @@ public class Comment implements Comparable<Comment> {
 
 	@Override
 	public int compareTo(Comment o) {
-		return this.gagId - o.gagId;
+		return (int) (this.gagId - o.gagId);
 	}
 	
 

@@ -38,12 +38,20 @@ public class Gag implements Comparable<Gag> {
 		this.category = new ArrayList<>();
 	}
 	
+	public int getUserId() {
+		return userId;
+	}
+	
 	public void Upvote(){
 		this.upvotes++;
 	}
 	
 	public void Downvote(){
 		this.upvotes--;
+	}
+	
+	public void addComment(Comment comment){
+		this.comments.add(comment);
 	}
 	
 	public void setComments(TreeSet<Comment> comments) {
