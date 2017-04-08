@@ -1,6 +1,9 @@
 package model;
 
+import java.sql.SQLException;
 import java.util.concurrent.ConcurrentHashMap;
+
+import model.dao.UserDAO;
 
 public class UserManager {
 
@@ -16,7 +19,7 @@ public class UserManager {
 		return instance;
 	}
 	
-	public boolean validateLogin(String username, String password) {
-		return UserDAO.allUsers.get(username).getPassword().equals(password);	
+	public boolean validateLogin(String username, String password) throws SQLException {
+		return UserDAO.getInstance().getAllUsers().get(username).getPassword().equals(password);	
 	}
 }
