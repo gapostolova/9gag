@@ -30,6 +30,16 @@ public class User {
 	private static final int MAX_YEAR_OF_BIRTH = 2003;
 	private static final int MIN_YEAR_OF_BIRTH = 1917;
 	
+	public User(String username, String email, String password, long userId){
+		setUsername(username);
+		setEmail(email);
+		setPassword(password);
+		setUserId(userId);
+		this.gender = "Unspecified";
+		
+		
+	}
+	
 	public User(String username, String email, String password, int userId, boolean nsfw, String profilePic,
 			String gender, LocalDate dateOfBirth, String description, boolean admin) {
 
