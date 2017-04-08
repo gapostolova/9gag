@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.TreeSet;
 
 public class Gag implements Comparable<Gag> {
@@ -9,7 +10,7 @@ public class Gag implements Comparable<Gag> {
 	private int userId;
 	private int gagID;
 	private boolean nsfw;
-	private String category;
+	private ArrayList<Category> category;
 	private int upvotes;
 	private boolean isPublic;
 	private TreeSet<Comment> comments;
@@ -17,7 +18,7 @@ public class Gag implements Comparable<Gag> {
 	
 	
 
-	public Gag(String gag, String title, int userId, int gagID, boolean nsfw, String category, boolean isPublic, String type) {
+	public Gag(String gag, String title, int userId, int gagID, boolean nsfw, boolean isPublic, String type) {
 		if(gag != null && !gag.isEmpty()){
 			this.gag = gag;
 		}
@@ -27,15 +28,14 @@ public class Gag implements Comparable<Gag> {
 		this.userId = userId;
 		this.gagID = gagID;
 		this.nsfw = nsfw;
-		if(category != null && !category.isEmpty()){
-			this.category = category;
-		}
+		
 		this.comments = new TreeSet<Comment>();
 		this.isPublic = isPublic;
 		
 		if(type != null && !type.isEmpty()){
 			this.type = type;
 		}
+		this.category = new ArrayList<>();
 	}
 	
 	public void Upvote(){
@@ -44,6 +44,14 @@ public class Gag implements Comparable<Gag> {
 	
 	public void Downvote(){
 		this.upvotes--;
+	}
+	
+	public int getGagID() {
+		return gagID;
+	}
+	
+	public void setCategory(ArrayList<Category> category) {
+		this.category = category;
 	}
 	
 	
