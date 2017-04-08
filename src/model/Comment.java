@@ -5,6 +5,7 @@ import java.util.TreeSet;
 
 public class Comment implements Comparable<Comment> {
 	
+	private static final int DEFAULT_UPVOTES = 0;
 	private  long userId;
 	private long gagId;
 	private long commentId;
@@ -19,12 +20,17 @@ public class Comment implements Comparable<Comment> {
 		super();
 		this.userId = userId;
 		this.gagId = gagId;
-		commentId = commentId;
+		this.commentId = commentId;
 		this.date = date;
 		if(content != null && !content.isEmpty()){
 			this.content = content;
 		}
 		this.motherCommentId = motherCommentId;
+		this.upvotes = DEFAULT_UPVOTES;
+	}
+	
+	public void setUpvotes(int upvotes) {
+		this.upvotes = upvotes;
 	}
 	
 	public void Upvote(){
@@ -37,7 +43,7 @@ public class Comment implements Comparable<Comment> {
 
 	@Override
 	public int compareTo(Comment o) {
-		return (int) (this.gagId - o.gagId);
+		return (int) (this.commentId - o.commentId);
 	}
 
 	@Override

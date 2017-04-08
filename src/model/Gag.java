@@ -45,6 +45,9 @@ public class Gag implements Comparable<Gag> {
 	public void Upvote(){
 		this.upvotes++;
 	}
+	public void setUpvotes(int upvotes) {
+		this.upvotes = upvotes;
+	}
 	
 	public void Downvote(){
 		this.upvotes--;

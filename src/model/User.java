@@ -1,6 +1,8 @@
 package model;
 
+import java.io.File;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.TreeSet;
 
 public class User {
@@ -13,8 +15,10 @@ public class User {
 	private String profilePic;
 	private final String gender;
 	private LocalDate dateOfBirth;
-	private String description;
+	private String description = "My funny collection";
 	private boolean admin;
+	private boolean isVerified;
+	private String verificationKey;
 	private TreeSet<Gag> gags;
 
 
@@ -25,10 +29,12 @@ public class User {
 			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
-
+	
+	private String sep = File.separator;
+	private String defaultBirthday = "1916-01-01";
 
 	private static final int MAX_YEAR_OF_BIRTH = 2003;
-	private static final int MIN_YEAR_OF_BIRTH = 1917;
+	private static final int MIN_YEAR_OF_BIRTH = 1916;
 	
 	public User(String username, String email, String password, long userId){
 		setUsername(username);
@@ -36,12 +42,20 @@ public class User {
 		setPassword(password);
 		setUserId(userId);
 		this.gender = "Unspecified";
+		this.profilePic = ".."+sep+"WebContent"+sep+"siteImages"+sep+"defaultProfilePic.jpg";
+		this.viewNsfwContent = false;
+		this.dateOfBirth = LocalDate.parse(defaultBirthday);
+		this.admin = false;
+		this.gags = new TreeSet<>();
+		this.isVerified = false;
+		this.verificationKey = " ";
 		
 		
 	}
 	
+	
 	public User(String username, String email, String password, int userId, boolean nsfw, String profilePic,
-			String gender, LocalDate dateOfBirth, String description, boolean admin) {
+			String gender, LocalDate dateOfBirth, String description, boolean admin, boolean isVerified, String verificationKey) {
 
 		setUsername(username);
 		setEmail(email);
@@ -60,6 +74,8 @@ public class User {
 		else{
 			this.gender = "Male";
 		}
+		this.isVerified = isVerified;
+		this.verificationKey = verificationKey;
 		
 		this.gags = new TreeSet<Gag>();
 		this.videos = new TreeSet<>();
@@ -215,16 +231,19 @@ public class User {
 	}
 
 
-
-
-
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", email=" + email + ", password=" + password + ", userId=" + userId
 				+ ", viewNsfwContent=" + viewNsfwContent + ", profilePic=" + profilePic + ", gender=" + gender
-				+ ", dateOfBirth=" + dateOfBirth + ", description=" + description + ", admin=" + admin + ", gags="
-				+ gags + "]";
+				+ ", dateOfBirth=" + dateOfBirth + ", description=" + description + ", admin=" + admin + ", isVerified="
+				+ isVerified + ", verificationKey=" + verificationKey + ", gags=" + gags + ", videos=" + videos + "]";
 	}
+
+
+
+
+
+	
 	
 	
 	

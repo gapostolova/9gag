@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -51,11 +52,12 @@ public class UserDAO {
 			PreparedStatement st = conn.prepareStatement(sql);
 			ResultSet res = st.executeQuery();
 			while(res.next()){
-				int isVerified = res.getInt("is_verified");
+				
 			
-				User user = new User(res.getString("username"), res.getString("email"), res.getString("password"), res.getInt("user_id"), res.getBoolean("nsfw"), res.getString("profile_pic"), res.getString("gender"), res.getDate("birthday").toLocalDate(), res.getString("description"), res.getBoolean("admin"));
+				User user = new User(res.getString("username"), res.getString("email"), res.getString("password"), res.getInt("user_id"), res.getBoolean("nsfw"), res.getString("profile_pic"), res.getString("gender"),res.getDate("birthday").toLocalDate(), res.getString("description"), res.getBoolean("admin"), res.getBoolean("is_verified"), res.getString("verification_key"));
 				//add gags/videos and comments
 				user.setGags(usersGags(user.getUserId()));
+				
 				System.out.println(user);
 				
 				allUsers.put(user.getEmail(), user);
@@ -77,24 +79,29 @@ public class UserDAO {
 		while(res.next()){
 			//add list of categories
 			Gag gag = new Gag(res.getString("content"), res.getString("title"), res.getLong("user_id"), res.getLong("gag_id"), res.getBoolean("nsfw"), res.getBoolean("public"), res.getString("type"));
+			gag.setUpvotes(res.getInt("points"));
 			gag.setCategory(categories(gag.getGagID()));
-			gag.setComments(comments(gag.getUserId()));	
+			gag.setComments(comments(gag.getGagID()));	
 			gags.add(gag);
 		}
 		return gags;
 	}
 	
 	
-	private synchronized TreeSet<Comment> comments(long userID) throws SQLException{
+	private synchronized TreeSet<Comment> comments(long gagId) throws SQLException{
 		
 		TreeSet<Comment> cmnts = new TreeSet<>();
 		
-		String sql = "select comment_id, time, description, mothership_id, points, user_id, gag_id from comments where user_id =" + userID +";";
+		String sql = "select comment_id, time, description, mothership_id, points, user_id, gag_id from comments where gag_id =" + gagId +";";
 		PreparedStatement st = conn.prepareStatement(sql);
-		ResultSet res = st.executeQuery();
+		ResultSet res;
+		
+			res = st.executeQuery();
+		
 		while(res.next()){
 			java.sql.Timestamp date = res.getTimestamp("time");
-			Comment comment = new Comment(res.getLong("user_id"), res.getLong("gag_id"), res.getLong("comment_id"), date.toLocalDateTime(), res.getString("description"), res.getLong("mothership_id"));
+			Comment comment = new Comment(res.getInt("user_id"), res.getInt("gag_id"), res.getInt("comment_id"), date.toLocalDateTime(), res.getString("description"), res.getLong("mothership_id"));
+			comment.setUpvotes(res.getInt("points"));
 			cmnts.add(comment);
 		}
 		
