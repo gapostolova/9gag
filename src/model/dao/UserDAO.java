@@ -75,7 +75,7 @@ public class UserDAO {
 		
 		while(res.next()){
 			//add list of categories
-			Gag gag = new Gag(res.getString("content"), res.getString("title"), res.getInt("userId"), res.getInt("gag_id"), res.getBoolean("nsfw"), res.getBoolean("public"), res.getString("type"));
+			Gag gag = new Gag(res.getString("content"), res.getString("title"), res.getInt("user_id"), res.getInt("gag_id"), res.getBoolean("nsfw"), res.getBoolean("public"), res.getString("type"));
 			gag.setCategory(categories(gag.getGagID()));
 			gag.setComments(comments(gag.getUserId()));	
 			gags.add(gag);
