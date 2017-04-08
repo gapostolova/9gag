@@ -36,11 +36,11 @@ public class User {
 	private static final int MAX_YEAR_OF_BIRTH = 2003;
 	private static final int MIN_YEAR_OF_BIRTH = 1916;
 	
-	public User(String username, String email, String password, long userId){
+	public User(String username, String email, String password){
 		setUsername(username);
 		setEmail(email);
 		setPassword(password);
-		setUserId(userId);
+		setUserId(-1);
 		this.gender = "Unspecified";
 		this.profilePic = ".."+sep+"WebContent"+sep+"siteImages"+sep+"defaultProfilePic.jpg";
 		this.viewNsfwContent = false;
