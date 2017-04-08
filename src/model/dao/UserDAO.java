@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +25,7 @@ public class UserDAO {
 
 	//							   	Email, User
 	private static ConcurrentHashMap<String, User> allUsers = new ConcurrentHashMap<>();
-	
+	private	Connection conn = DBManager.getInstance().getConnection();
 	private boolean dataHasChanged = false;
 	private static UserDAO instance;
 	
@@ -47,7 +48,7 @@ public class UserDAO {
 		if(allUsers.isEmpty() || dataHasChanged == true){
 			
 			String sql = "SELECT u.user_id, u.username, u.password, u.email, u.nsfw, u.profile_pic, u.gender, u.birthday, u.description, u.admin, u.is_verified, u.verification_key from users u;";
-			PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+			PreparedStatement st = conn.prepareStatement(sql);
 			ResultSet res = st.executeQuery();
 			while(res.next()){
 				int isVerified = res.getInt("is_verified");
@@ -70,7 +71,7 @@ public class UserDAO {
 		
 		TreeSet<Gag> gags = new TreeSet<Gag>();
 		String sql = "SELECT gag_id, content, nsfw, title, points, public, type, user_id FROM gags WHERE user_id = " + userId + ";";
-		PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+		PreparedStatement st = conn.prepareStatement(sql);
 		ResultSet res = st.executeQuery();
 		
 		while(res.next()){
@@ -89,7 +90,7 @@ public class UserDAO {
 		TreeSet<Comment> cmnts = new TreeSet<>();
 		
 		String sql = "select comment_id, time, description, mothership_id, points, user_id, gag_id from comments where user_id =" + userID +";";
-		PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+		PreparedStatement st = conn.prepareStatement(sql);
 		ResultSet res = st.executeQuery();
 		while(res.next()){
 			java.sql.Timestamp date = res.getTimestamp("time");
@@ -112,7 +113,7 @@ public class UserDAO {
 	private synchronized ArrayList<Category> categories(long gagID) throws SQLException{	
 		ArrayList<Category> category = new ArrayList<>();
 		String sql = "select categories_category_id, name from gags_in_categories join categories on(categories_category_id = category_id) where gags_gag_id=" + gagID;
-		PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+		PreparedStatement st = conn.prepareStatement(sql);
 		ResultSet res = st.executeQuery();
 		while(res.next()){
 			Category cat = new Category(res.getLong("categories_category_id"), res.getString("name"));
@@ -159,47 +160,7 @@ public class UserDAO {
 	
 	
 	
-	//get all users
-//	public Set<User> getAllUsers() {
-//		Set<User> allUsers = new HashSet<>();
-//		
-//		Statement statement = null;
-//		ResultSet res = null;
-//		
-//		try {
-//			statement = DBManager.getInstance().getConnection().createStatement();
-//			res = statement.executeQuery("SELECT user_id, username, password, email, nsfw, profile_pic, gender, birthday, country, description, admin FROM users;");
-//			while(res.next()) {
-//				User user = new User(res.getString("username"), 
-//						res.getString("email"), 
-//						res.getString("password"), 
-//						res.getInt("user_id"), 
-//						res.getBoolean("nsfw"), 
-//						res.getString("profile_pic"), 
-//						res.getString("gender"), 
-//						res.getDate("birthday").toLocalDate(), 
-//						res.getString("country"),
-//						res.getString("description"),
-//						res.getBoolean("admin"));
-//				allUsers.add(user);
-//				//add gags and videos
-//			}
-//		} catch (SQLException e) {
-//			System.out.println("Couldn't retrieve users from DB");
-//		} finally {
-//			try {
-//				statement.close();
-//				res.close();
-//			} catch (SQLException e) {
-//				System.out.println("Couldn't close statement or resultset.");
-//			}
-//			
-//		}
-//		
-//		System.out.println("Got all users from DB");
-//		
-//		return Collections.unmodifiableSet(allUsers);
-//	}
+
 	
 	//add user --- whole process should be a transaction
 	
@@ -207,7 +168,7 @@ public class UserDAO {
 		PreparedStatement pst = null;
 		
 		try {
-			pst = DBManager.getInstance().getConnection().prepareStatement(
+			pst = conn.prepareStatement(
 				"INSERT INTO users (username, password, email, nsfw, profile_pic, gender, birthday, country, description, admin) VALUES (?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			pst.setString(1, u.getUsername());
 			pst.setString(2, u.getPassword());
@@ -245,7 +206,7 @@ public class UserDAO {
 		PreparedStatement pst = null;
 		
 		try {
-			pst = DBManager.getInstance().getConnection().prepareStatement(
+			pst = conn.prepareStatement(
 					"DELETE FROM TABLE users WHERE user_id = ?");
 			pst.setLong(1, u.getUserId());
 			pst.executeUpdate();
@@ -270,7 +231,7 @@ public class UserDAO {
 		PreparedStatement pst = null;
 		
 		try {
-			pst = DBManager.getInstance().getConnection().prepareStatement(
+			pst =conn.prepareStatement(
 					"UPDATE users SET password = ? WHERE user_id = ?;");
 			pst.setString(1, pass);
 			pst.setLong(2, u.getUserId());
@@ -294,7 +255,7 @@ public class UserDAO {
 		PreparedStatement pst = null;
 		
 		try {
-			pst = DBManager.getInstance().getConnection().prepareStatement(
+			pst = conn.prepareStatement(
 					"UPDATE users SET profile_pic = ? WHERE user_id = ?;");
 			pst.setString(1, pic);
 			pst.setLong(2, u.getUserId());
@@ -317,7 +278,7 @@ public class UserDAO {
 		PreparedStatement pst = null;
 		
 		try {
-			pst = DBManager.getInstance().getConnection().prepareStatement(
+			pst = conn.prepareStatement(
 					"UPDATE users SET nsfw = ? WHERE user_id = ?;");
 			pst.setBoolean(1, nsfw);
 			pst.setLong(2, u.getUserId());
@@ -340,7 +301,7 @@ public class UserDAO {
 		PreparedStatement pst = null;
 		
 		try {
-			pst = DBManager.getInstance().getConnection().prepareStatement(
+			pst = conn.prepareStatement(
 					"UPDATE users SET description = ? WHERE user_id = ?;");
 			pst.setString(1, description);
 			pst.setLong(2, u.getUserId());
@@ -362,7 +323,7 @@ public class UserDAO {
 		PreparedStatement pst = null;
 		
 		try {
-			pst = DBManager.getInstance().getConnection().prepareStatement(
+			pst = conn.prepareStatement(
 					"UPDATE users SET admin = ? WHERE user_id = ?;");
 			pst.setBoolean(1, admin);
 			pst.setLong(2, u.getUserId());
