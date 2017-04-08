@@ -24,24 +24,29 @@ public class LoginServlet extends HttpServlet {
 		try {
 			if(!UserDAO.getInstance().getAllUsers().containsKey(email)) {
 				response.sendRedirect("register.jsp");
+				return;
 			}
 		} catch (SQLException e) {
 			//error page
 		}
 		
-		if(UserManager.getInstance().validateLogin(email, password)) {
-			session.setAttribute("logged", true);
-			try {
+		try {
+			String url = "";
+			if(UserManager.getInstance().validateLogin(email, password)) {
+				session.setAttribute("logged", true);
 				session.setAttribute("user", UserDAO.getInstance().getUser(email));
-				response.sendRedirect("index.html");
-			} catch (SQLException e) {
-				//error page
+				url = "index.html";
 			}
-			
+			else {
+				url = "login.jsp";
+			}
+			response.sendRedirect(url);
+			return;
+		} catch (SQLException e) {
+			//error page
 		}
-		else {
-			response.sendRedirect("login.jsp");
-		}
+		
+		
 	}
 
 }
