@@ -82,7 +82,9 @@ public class User {
 		
 	}
 	
-	
+	public boolean isVerified() {
+		return isVerified;
+	}
 	
 	
 	
@@ -237,6 +239,14 @@ public class User {
 				+ ", viewNsfwContent=" + viewNsfwContent + ", profilePic=" + profilePic + ", gender=" + gender
 				+ ", dateOfBirth=" + dateOfBirth + ", description=" + description + ", admin=" + admin + ", isVerified="
 				+ isVerified + ", verificationKey=" + verificationKey + ", gags=" + gags + ", videos=" + videos + "]";
+	}
+
+
+	public boolean verify(String verificationKey) {
+		if (this.verificationKey.compareTo(verificationKey) == 0){
+			isVerified = true;
+		}
+		return isVerified;	
 	}
 
 

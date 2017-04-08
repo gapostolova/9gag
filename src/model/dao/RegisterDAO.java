@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.UUID;
 
+import emailSender.SendEmail;
 //import emailSender.SendEmail;
 import model.User;
 
@@ -66,7 +67,7 @@ public boolean register(String username, String email, String password){
 					
 				    System.out.println("User inserted successfuly into DB");
 					
-					//	SendEmail.sendVerificationMail(email, firstName, uuid);
+					SendEmail.sendVerificationMail(email, username, uuid);
 						
 					return true;
 				}

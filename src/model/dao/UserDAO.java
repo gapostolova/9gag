@@ -18,14 +18,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import model.Category;
 import model.Comment;
 import model.Gag;
-
 import model.User;
 
 
 public class UserDAO {
 
 	//							   	Email, User
-	private static ConcurrentHashMap<String, User> allUsers = new ConcurrentHashMap<>();
+	private static HashMap<String, User> allUsers = new HashMap<>();
 	private	Connection conn = DBManager.getInstance().getConnection();
 	private boolean dataHasChanged = false;
 	private static UserDAO instance;
@@ -131,8 +130,30 @@ public class UserDAO {
 
 	}
 	
-
 	
+	public synchronized boolean isVerified(String email) throws SQLException {
+		if(exists(email)){
+			return getAllUsers().get(email).isVerified();
+		}
+		return false;
+	}
+
+	public synchronized boolean verify(String email, String verificationKey) throws SQLException {
+		if(exists(email)){
+			User user = getAllUsers().get(email);
+			user.verify(verificationKey);
+			String sql = "UPDATE users SET is_verified='1' WHERE email=?";
+			PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+			st.setString(1, email);
+			st.executeUpdate();
+			return getAllUsers().get(email).isVerified();
+		}
+		return false;
+	}
+
+	public synchronized boolean exists(String email) throws SQLException {
+		return getAllUsers().containsKey(email);
+	}
 	
 	
 	

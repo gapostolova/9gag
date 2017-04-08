@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -26,13 +29,13 @@
           
           <form action="register" method="post" >
           
-          <div class="top-row">
+          
             <div class="field-wrap">
               <label>
                 username<span class="req">*</span>
               </label>
               <input type="text" required autocomplete="off"  name="username"/>
-            </div>
+           </div>
         
         
           <div class="field-wrap">
