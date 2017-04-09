@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//import emailSender.SendEmail;
+import emailSender.SendEmail;
 import model.dao.DBManager;
 import model.dao.RegisterDAO;
 import model.dao.UserDAO;

@@ -19,11 +19,45 @@
   <div class="form">
       
       <ul class="tab-group">
-        <li class="tab active"><a href="#signup">Sign Up</a></li>
-        <li class="tab"><a href="#login">Log In</a></li>
+        <li class="tab active"><a href="#login">Log In</a></li>
+        <li class="tab"><a href="#signup">Sign Up</a></li>
       </ul>
       
       <div class="tab-content">
+        
+        
+        <div id="login">   
+          <h1>Welcome Back!</h1>
+          
+          <form action="logIn" method="post">
+          
+            <div class="field-wrap">
+            <label>
+              Email Address<span class="req">*</span>
+            </label>
+            <input type="email"required autocomplete="off"  name="email"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Password<span class="req">*</span>
+            </label>
+            <input type="password"required autocomplete="off" name="pass"/>
+          </div>
+          
+          
+          
+         
+          
+          
+        <!--    <p class="forgot"><a href="#">Forgot Password?</a></p> -->
+          
+          <button class="button button-block"/>Log In</button>
+          
+          </form>
+
+        </div>
+        
         <div id="signup">   
           <h1>Sign up for free!</h1>
           
@@ -60,38 +94,6 @@
           </div>
           
           <button type="submit" class="button button-block"/>Get Started</button>
-          
-          </form>
-
-        </div>
-        
-        <div id="login">   
-          <h1>Welcome Back!</h1>
-          
-          <form action="logIn" method="post">
-          
-            <div class="field-wrap">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input type="email"required autocomplete="off"  name="email"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Password<span class="req">*</span>
-            </label>
-            <input type="password"required autocomplete="off" name="pass"/>
-          </div>
-          
-          
-          
-         
-          
-          
-        <!--    <p class="forgot"><a href="#">Forgot Password?</a></p> -->
-          
-          <button class="button button-block"/>Log In</button>
           
           </form>
 
