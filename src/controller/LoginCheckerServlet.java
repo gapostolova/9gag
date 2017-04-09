@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package controller;
 
 import java.io.IOException;
@@ -22,9 +23,6 @@ public class LoginCheckerServlet extends HttpServlet {
 			url = "login.jsp";
 		
 		request.getRequestDispatcher(url).forward(request,response);
-	}
-
-	
+	}	
 
 }
-

@@ -20,6 +20,7 @@ public class UserManager {
 	}
 	
 	public boolean validateLogin(String username, String password) throws SQLException {
+		System.out.println(username + " pass: "+ password);
 		return UserDAO.getInstance().getAllUsers().get(username).getPassword().equals(password);	
 	}
 	
