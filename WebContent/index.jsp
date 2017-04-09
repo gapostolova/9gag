@@ -16,6 +16,10 @@
 <link rel="alternate" href="android-app://com.ninegag.android.app/http/9gag.com/hot" />
 <link rel="shortcut icon" href="https://assets-9gag-fun.9cache.com/s/fab0aa49/a7dc57c55c1812b8e4115722f0a84a4849f34ef7/static/dist/core/img/favicon_v2.png" />
 
+<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="css/style.css">
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="keywords" content="fun,funny,lol,meme,GIF,wtf,omg,fail,anime,cosplay,forever alone,cute" />
 <meta name="description" content="9GAG has the best funny pics, gifs, videos, gaming, anime, manga, movie, tv, cosplay, sport, food, memes, cute, fail, wtf photos on the internet!" />
@@ -1712,82 +1716,133 @@
 			<input type="submit" value="Submit" class="badge-report-submit-btn" data-text-loading="Please wait ...">
 		</div>
 	</form>
-</section>    <section class="modal signup badge-overlay-signin hide">
-    <a class="btn-close badge-overlay-close" href="#">&#10006;</a>
-    <section id="signup">
-    <h2>Login</h2>
-    <p class="lead">Connect with a social network</p>
-    <div class="social-signup">
-        <a class="btn-connect-option facebook badge-facebook-connect" href="#" onclick="GAG.GA.track('Login', 'ConnectFacebook', 'Hot');">Facebook</a>
-        <span class="badge-gplus-connect"><a class="btn-connect-option google-plus badge-gplus-connect-btn" href="javascript:void(0);" onclick="GAG.GA.track('Login', 'ConnectGoogle', 'Hot');">Google</a></span>
-            </div>
-    <form id="login-email" class="badge-login-form" action="https://9gag.com/login" method="POST">
-        <input type="hidden" id="jsid-login-form-csrftoken" name="csrftoken" value=""/>
-        <input type="hidden" id="jsid-login-form-next-url" name="next" value=""/>
-                                <input type="hidden" name="location" value="1"/>
-                        <p class="lead">Log in with your email address </p>
-        <div class="field">
-            <label for="jsid-login-email-name">Email</label>
-            <input id="jsid-login-email-name" type="text" name="username" value="" autofocus="autofocus"/>
-        </div>
-        <div class="field">
-            <label for="login-email-password">Password</label>
-            <input id="login-email-password" type="password" name="password" value="" />
-                    </div>
-        <div class="btn-container">
-            <input class="btn left" type="submit" value="Log in" onclick="GAG.GA.track('Login', 'LoginEmail',  'Hot');"/>
-            <a class="forgot-password" href="https://9gag.com/recover" onclick="GAG.GA.track('Login', 'TapForgotPassword',  'Hot');">Forgot Password</a>
-        </div>
-    </form>
-</section>
-</section>	<section class="modal signup hide badge-overlay-signup-fb">
-    <a class="badge-overlay-close btn-close" href="#">&#10006;</a>
-    <section id="signup">
-    <div id="signup-fb" class="">
-        <h2>Hey there!</h2>
-        <p class="lead">9GAG is your best source of fun. Share anything you find interesting, get real responses from people all over the world, and discover what makes you laugh.</p>
-        <div class="social-signup">
-            <a class="btn-connect-option facebook badge-facebook-connect" href="#" onclick="GAG.GA.track('SignUp', 'connectFacebook', 'Hot');">Facebook</a>
-            <span class="badge-gplus-connect"><a class="btn-connect-option google-plus badge-gplus-connect-btn" href="javascript:void(0);" onclick="GAG.GA.track('SignUp', 'connectGoogle', 'Hot');">Google</a></span>
-                    </div>
-                <p class="alternative">Sign up with your <a href="#" class="badge-signup-email-link" onclick="GAG.GA.track('SignUp', 'TapSignUpEmail', 'Hot');">Email Address</a></p>
-                <p class="alternative">Have an account? <a href="https://9gag.com/login?ref=" class="badge-signup-login-link"  onclick="GAG.GA.track('SignUp', 'TapLogin', 'Hot');">Login</a></p>
-    </div>
+</section>   
 
-    <div id="signup-email" class=" hide">
-        <h2>Become a member</h2>
-        <form id="signup-email" action="https://9gag.com/member/email-signup" autocomplete="off" method="post">
-            <input type="hidden" id="jsid-login-form-next-url" name="next" value=""/>
-            <div class="field">
-                <label for="signup-email-name">Full Name</label>
-                <input id="signup-email-name" type="text" name="fullname" class="badge-input-fullname badge-input-field" placeholder="" value="" maxlength="20"/>
-            </div>
-            <div class="field">
-                <label for="signup-email-email">Email Address</label>
-                <input type="email" name="email" id="signup-email-email" class="badge-input-email badge-input-field" placeholder="" value="" />
-            </div>
-            <div class="field">
-                <label for="signup-email-password">Password</label>
-                <input id="signup-email-password" type="password" name="password" value="">
-            </div>
-            <div class="field captcha">
-                <div class="badge-g-recaptcha"></div>
-                <p class="error-message red"></p>
-            </div>
-            <div class="btn-container">
-                <input class="btn left" type="submit" value="Sign Up" onclick="GAG.GA.track('SignUp', 'SignUpEmail', 'Hot');"/>
-            </div>
-            <input type="hidden" name="tzo" class="badge-input-tzo" value="0" />
-            <input type="hidden" name="next" value="" class="badge-signup-form-next-url"/>
-            <input type="hidden" name="csrftoken" id="csrftoken" value=""/>
-            <input type="hidden" name="src" value="" />
-            <input type="hidden" name="ref" value="" />
-            <input type="hidden" name="app" value="web" />
-        </form>
-    </div>
-</section>
+ <section class="modal signup badge-overlay-signin hide">
+   
+    
+   
+    
+    
+    
+ <!--    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--> 
+     <!--    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--> 
+     <!--    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--> 
+     <!--    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--> 
+    
+    
+    
+   
 
-</section>	<div id="jsid-modal-post-zoom" class="hide" style="height: 100%;">
+   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script src="js/index.js"></script>
+
+  
+ 
+  <div class="form">
+       <a class="btn-close badge-overlay-close" href="#">&#10006;</a>
+      <ul class="tab-group">
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab"><a href="#login">Log In</a></li>
+      </ul>
+      
+      <div class="tab-content">
+        <div id="signup">   
+          <h1>Sign up for free!</h1>
+          
+          <form action="register" method="post" >
+          
+          
+            <div class="field-wrap">
+              <label>
+                Username<span class="req">*</span>
+              </label>
+              <input type="text" required autocomplete="off"  name="username"/>
+           </div>
+        
+        
+          <div class="field-wrap">
+            <label>
+              Email Address<span class="req">*</span>
+            </label>
+            <input type="email"required autocomplete="off" name="email"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Set A Password<span class="req">*</span>
+            </label>
+            <input type="password"required autocomplete="off" name="password"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Confirm password<span class="req">*</span>
+            </label>
+            <input type="password"required autocomplete="off" name="passConfirm"/>
+          </div>
+          
+          <button type="submit" class="button button-block"/>Get Started</button>
+          
+          </form>
+
+        </div>
+        
+        <div id="login">   
+          <h1>Welcome Back!</h1>
+          
+          <form action="logIn" method="post">
+          
+            <div class="field-wrap">
+            <label>
+              Email Address<span class="req">*</span>
+            </label>
+            <input type="email"required autocomplete="off"  name="email"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Password<span class="req">*</span>
+            </label>
+            <input type="password"required autocomplete="off" name="pass"/>
+          </div>
+          
+          
+          
+         
+          
+          
+        <!--    <p class="forgot"><a href="#">Forgot Password?</a></p> -->
+          
+          <button class="button button-block"/>Log In</button>
+          
+          </form>
+
+        </div>
+        
+      </div><!-- tab-content -->
+      
+</div> <!-- /form -->
+
+ 
+
+
+
+
+
+    
+    
+    
+    <!--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    
+    
+    
+
+
+</section>	
+
+<div id="jsid-modal-post-zoom" class="hide" style="height: 100%;">
 	<div class="badge-post-zoom-img zoom-container">			
 	</div>
 	<a class="badge-overlay-close close-button" href="javascript: void(0);">Close</a>

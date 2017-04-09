@@ -10,7 +10,9 @@
 </head>
 <body>
 
-<img src="..\9gag\WebContent\siteImages\Error-Page.png" >
+<!--  not working with relative path -->
+
+<img src="C:\Users\Gabriela\Desktop\9gag\WebContent\siteImages\Error-Page.png" >
 
 
 </body>
