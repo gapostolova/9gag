@@ -3,6 +3,8 @@ package model;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class User {
@@ -20,8 +22,6 @@ public class User {
 	private boolean isVerified;
 	private String verificationKey;
 	private TreeSet<Gag> gags;
-
-
 
 	private TreeSet<Video> videos;
 	
@@ -96,6 +96,10 @@ public class User {
 
 
 
+	public void addGag(Gag gag){
+		gags.add(gag);
+	}
+	
 
 	public void setEmail(String email) {
 		if(email != null && !email.isEmpty() && email.matches(EMAIL_PATTERN)){
@@ -202,6 +206,10 @@ public class User {
 
 	public boolean isAdmin() {
 		return admin;
+	}
+	
+	public Set<Gag> getGags() {
+		return Collections.unmodifiableSet(gags);
 	}
 	
 	@Override

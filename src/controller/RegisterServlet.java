@@ -48,7 +48,9 @@ public class RegisterServlet extends HttpServlet{
 		}
 		
 		if(RegisterDAO.getInstance().register(username, email, password)){
-			UserDAO.getInstance().setDataHasChanged(true);
+			
+			
+			
 			resp.getWriter().write(" kk, you should verify your account");
 		}
 		else{

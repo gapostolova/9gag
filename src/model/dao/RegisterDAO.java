@@ -62,11 +62,12 @@ public boolean register(String username, String email, String password){
 					long id = res.getLong(1);
 					user.setUserId(id);
 					
-					//in servlet -> if register() == true ; UserDAO.getInstance().setDataHasChanged(true);
+					
 					
 					
 				    System.out.println("User inserted successfuly into DB");
-					
+				    
+				    UserDAO.getInstance().addUser(user);
 					SendEmail.sendVerificationMail(email, username, uuid);
 						
 					return true;

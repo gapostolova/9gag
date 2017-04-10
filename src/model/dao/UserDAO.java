@@ -42,6 +42,12 @@ public class UserDAO {
 		this.dataHasChanged = dataHasChanged;
 	}
 	
+	public void addUserInCollection(User user){
+		allUsers.put(user.getEmail(), user);
+		
+	}
+	
+	
 	
 	public synchronized Map<String , User> getAllUsers() throws SQLException{
 		
@@ -57,7 +63,7 @@ public class UserDAO {
 				//add gags/videos and comments
 				user.setGags(usersGags(user.getUserId()));
 				
-				System.out.println(user);
+				
 				
 				allUsers.put(user.getEmail(), user);
 			}
@@ -143,7 +149,7 @@ public class UserDAO {
 			User user = getAllUsers().get(email);
 			user.verify(verificationKey);
 			String sql = "UPDATE users SET is_verified='1' WHERE email=?";
-			PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, email);
 			st.executeUpdate();
 			return getAllUsers().get(email).isVerified();
@@ -156,6 +162,33 @@ public class UserDAO {
 	}
 	
 	
+	public String getUserEmail(long userId) {
+		String email = null;
+		try {
+			
+			String sql = "select email from users where user_id = "+userId + ";";
+			PreparedStatement pst;
+			
+				pst = conn.prepareStatement(sql);
+			
+			ResultSet res = pst.executeQuery();
+			while(res.next()){
+				email = res.getString("email");
+			}
+		} catch (SQLException e) {
+			System.out.println("getUserEmail(long userId) in UserDAO: " + e.getMessage());
+		}
+		return email;	
+	}
+
+	
+	public void addGagToUser(Gag gag) {
+		
+		String email = getUserEmail(gag.getUserId());
+		User user = allUsers.get(email);
+		user.addGag(gag);
+		
+	}
 	
 	
 	
@@ -367,5 +400,7 @@ public class UserDAO {
 			}
 		}
 	}
+
+	
 		
 }
