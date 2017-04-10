@@ -184,6 +184,8 @@ public class UserDAO {
 	
 	public void addGagToUser(Gag gag) {
 		
+		System.out.println("ADD GAG TO USER in USER DAO");
+		System.out.println(gag);
 		String email = getUserEmail(gag.getUserId());
 		User user = allUsers.get(email);
 		user.addGag(gag);

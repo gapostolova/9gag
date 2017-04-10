@@ -18,6 +18,7 @@ public class Gag implements Comparable<Gag> {
 	private String type;
 	
 	
+	//constructor for when a gag is added
 	public Gag(String gag, String title, long userId, boolean nsfw, boolean isPublic, String type) {
 		if(gag != null && !gag.isEmpty()){
 			this.gag = gag;
@@ -33,6 +34,7 @@ public class Gag implements Comparable<Gag> {
 		if(type != null && !type.isEmpty()){
 			this.type = type;
 		}
+		this.upvotes = 0;
 		this.category = new ArrayList<>();
 		this.gagID = DEFAULT_GAG_ID;
 	}
@@ -69,6 +71,10 @@ public class Gag implements Comparable<Gag> {
 		this.upvotes = upvotes;
 	}
 	
+	public int getUpvotes() {
+		return upvotes;
+	}
+	
 	public void Downvote(){
 		this.upvotes--;
 	}
@@ -79,6 +85,24 @@ public class Gag implements Comparable<Gag> {
 	
 	public void setComments(TreeSet<Comment> comments) {
 		this.comments = comments;
+	}
+	
+	
+	public void addCategory(Category c){
+		this.category.add(c);
+	}
+	
+	public boolean hasCategory(String categor){
+		for(Category cat : category){
+			if(cat.getCategoryName().equals(categor.toUpperCase())){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public ArrayList<Category> getCategory() {
+		return category;
 	}
 	
 	public long getGagID() {

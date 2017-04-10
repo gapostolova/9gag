@@ -97,6 +97,7 @@ public class User {
 
 
 	public void addGag(Gag gag){
+		
 		gags.add(gag);
 	}
 	
@@ -246,7 +247,7 @@ public class User {
 		return "User [username=" + username + ", email=" + email + ", password=" + password + ", userId=" + userId
 				+ ", viewNsfwContent=" + viewNsfwContent + ", profilePic=" + profilePic + ", gender=" + gender
 				+ ", dateOfBirth=" + dateOfBirth + ", description=" + description + ", admin=" + admin + ", isVerified="
-				+ isVerified + ", verificationKey=" + verificationKey + ", gags=" + gags + ", videos=" + videos + "]";
+				+ isVerified + ", verificationKey=" + verificationKey + ", gags=" + gags + ", videos=" + videos + "]\n";
 	}
 
 

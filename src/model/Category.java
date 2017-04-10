@@ -8,8 +8,16 @@ public class Category {
 	public Category(long categoryID, String categoryName) {
 		this.categoryID = categoryID;
 		if(categoryName != null && !categoryName.isEmpty()){
-			this.categoryName = categoryName;
+			this.categoryName = categoryName.toUpperCase();
 		}
+	}
+	
+	public long getCategoryID() {
+		return categoryID;
+	}
+	
+	public String getCategoryName() {
+		return categoryName;
 	}
 
 	@Override
