@@ -12,6 +12,7 @@ import java.util.TreeSet;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 import model.Category;
+import model.Comment;
 import model.Gag;
 import model.User;
 
@@ -128,7 +129,35 @@ public class GagDAO {
 		return Collections.unmodifiableSet(categories);
 	}
 	
+	public void addCommentToGag(Comment c) {
+		Gag gagTemp = null;
+		try {
+			for(Gag gag : UserDAO.getInstance().getAllUsers().get(UserDAO.getInstance().getUserEmail(c.getUserId())).getGags()) {
+				if(gag.getGagID() == c.getGagId()) {
+					gagTemp = gag;
+					break;
+				}	
+			}
+			gagTemp.addComment(c);
+		} catch (SQLException e) {
+			System.out.println("Comment not added to gag");
+		}
+	}
 	
+	public void deleteComment(Comment c) {
+		Gag gagTemp = null;
+		try {
+			for(Gag gag : UserDAO.getInstance().getAllUsers().get(UserDAO.getInstance().getUserEmail(c.getUserId())).getGags()) {
+				if(gag.getGagID() == c.getGagId()) {
+					gagTemp = gag;
+					break;
+				}	
+			}
+			gagTemp.deleteComment(c);
+		} catch (SQLException e) {
+			System.out.println("Comment not added to gag");
+		}
+	}
 	
 	
 	

@@ -151,5 +151,7 @@ public class Gag implements Comparable<Gag> {
 				+ comments + ", type=" + type + "]\n";
 	}
 	
-	
+	public void deleteComment(Comment comment) {
+		this.comments.remove(comment);
+	}
 }
