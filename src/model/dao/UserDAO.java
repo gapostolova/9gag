@@ -86,11 +86,15 @@ public class UserDAO {
 			Gag gag = new Gag(res.getString("content"), res.getString("title"), res.getLong("user_id"), res.getLong("gag_id"), res.getBoolean("nsfw"), res.getBoolean("public"), res.getString("type"));
 			gag.setUpvotes(res.getInt("points"));
 			gag.setCategory(categories(gag.getGagID()));
-			gag.setComments(comments(gag.getGagID()));	
+			TreeSet<Comment> comments = comments(gag.getGagID());
+			gag.setComments(comments);	
+			//fill comments
+			CommentDAO.getInstance().addComments(comments);
 			gags.add(gag);
 		}
 		return gags;
 	}
+	
 	
 	
 	private synchronized TreeSet<Comment> comments(long gagId) throws SQLException{

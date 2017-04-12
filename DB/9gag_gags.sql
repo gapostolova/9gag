@@ -45,7 +45,7 @@ CREATE TABLE `gags` (
 
 LOCK TABLES `gags` WRITE;
 /*!40000 ALTER TABLE `gags` DISABLE KEYS */;
-INSERT INTO `gags` VALUES (1,'Cats',0,'Cats',6,1,1,'jpg'),(2,'Dogs',0,'Dogs',5,1,0,'gif'),(3,'Frog',1,'Frogs',150,22,1,'jpg'),(4,'Monkey',0,'Monkeys',200,22,1,'gif'),(5,'Some gag',1,'Dano da stane',0,20,1,'gpg'),(7,'SEGA',1,'Dano da stane',0,20,1,'gpg'),(8,'HoT',1,'Dano da stane',3000,20,1,'gpg'),(10,'TRENDING',1,'Dano da stane',600,20,1,'gpg'),(12,'hrana',1,'Dano da stane',600,20,1,'jpg'),(18,'smeshnichko',1,'Dano da stane',600,22,1,'jpg');
+INSERT INTO `gags` VALUES (1,'Cats',0,'Cats',6,1,1,'jpg'),(2,'Dogs',0,'Dogs',5,1,0,'gif'),(3,'Frog',1,'Frogs',150,5,1,'jpg'),(4,'Monkey',0,'Monkeys',200,5,1,'gif'),(5,'Some gag',1,'Da IMA',0,4,1,'gpg'),(6,'SEGA',1,'Dano da stane',0,4,1,'gpg'),(7,'HoT',1,'Chilli',3000,4,1,'gpg'),(8,'TRENDING',1,'so Fine',600,4,1,'gpg'),(9,'hrana',1,'Food',600,5,1,'jpg'),(10,'smeshnichko',1,'GHA hA',600,5,1,'jpg');
 /*!40000 ALTER TABLE `gags` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-12 13:34:36
+-- Dump completed on 2017-04-12 16:01:16

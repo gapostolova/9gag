@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeSet;
@@ -15,7 +16,7 @@ import model.Gag;
 public class CommentDAO {
 
 	public static TreeSet<Comment> allComments;
-	public static CommentDAO instance;
+	private static CommentDAO instance;
 	private static boolean dataHasChanged;
 	private	Connection conn = DBManager.getInstance().getConnection();
 	
@@ -29,43 +30,46 @@ public class CommentDAO {
 		return instance;
 	}
 	
-	public synchronized void addComment(Comment c) throws SQLException {
-			try {
-				Gag gagTemp = null;
-				for(Gag gag : UserDAO.getInstance().getAllUsers().get(c.getUserEmail()).getGags()) {
-					if(gag.getGagID() == c.getGagId()) {
-						gagTemp = gag;
-						break;
-					}
-				}
-				String sql = "INSERT INTO `9gag`.`comments` (`time`, `description`, `mothership_id`, `points`, `user_id`, `gag_id`) VALUES (?,?,?,?,?,?)";
-				PreparedStatement pst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-				//pst.setTime(1, c.getDate());
-				pst.setString(2, c.getContent());
-				pst.setLong(3, c.getMotherCommentId());
-				pst.setInt(4, 0);
-				pst.setLong(5, c.getUserId());
-				pst.setLong(6, c.getGagId());
-				pst.executeUpdate();
-				
-				//add commentId
-			    ResultSet res = pst.getGeneratedKeys();
-				res.next();
-				long commentId = res.getLong(1);
-				c.setCommentId(commentId);
-				System.out.println("comment v db");
-				System.out.println(c);
-				
-				//add comment to main collection
-				GagDAO.getInstance().addCommentToGag(c);
-				
-			} catch (SQLException e) {
-				System.out.println("Error adding gag!");
-				throw new SQLException("Error upvoting!");
-			}
+	public synchronized void addComments(TreeSet<Comment> comments){
+		allComments.addAll(comments);
+	}
+	
+	//this should be boolean
+	public void addComment(Comment comment) {
+		
+		try {
+		String sql = "INSERT INTO `9gag`.`comments` (`time`, `description`, `mothership_id`, `points`, `user_id`, `gag_id`) VALUES (?,?,?,?,?,?)";
+		PreparedStatement pst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		
+			pst.setTimestamp(1, Timestamp.valueOf(comment.getDate()));
+		
+		pst.setString(2, comment.getContent());
+		pst.setLong(3, comment.getMotherCommentId());
+		pst.setInt(4, 0);
+		pst.setLong(5, comment.getUserId());
+		pst.setLong(6, comment.getGagId());
+		pst.executeUpdate();
+		
+		//add commentId
+	    ResultSet res = pst.getGeneratedKeys();
+		res.next();
+		long commentId = res.getLong(1);
+		comment.setCommentId(commentId);
+		
+		System.out.println("comment v db");
+		System.out.println(comment);
+		Gag gag = GagDAO.getInstance().getGagById(comment.getGagId());
+		gag.addComment(comment);
+		
+		} catch (SQLException e) {
+			System.out.println("couldn't add comment in CommentDAO: " + e.getMessage());
+		}
+		
 		
 	}
 	
+	
+	//it should delete the comment and all of the comments that this comment is motherComment of
 	public synchronized void deleteComment(Comment c) throws SQLException {
 		try {
 			
@@ -79,7 +83,7 @@ public class CommentDAO {
 			GagDAO.getInstance().deleteComment(c);
 			
 			} catch (SQLException e) {
-				System.out.println("Error upvoting!");
+				System.out.println("Could not delete comment in deleteComment in CommentDAO: " + e.getMessage());
 				throw new SQLException("Error upvoting!");
 			}
 		

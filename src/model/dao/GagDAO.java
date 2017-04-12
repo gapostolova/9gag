@@ -21,7 +21,7 @@ public class GagDAO {
 	private static final int MIN_TRENDING_GAG_UPVOTES = 500;
 	private static final int MIN_HOT_GAG_UPVOTES = 2000;
 	public static TreeSet<Gag> allGags;
-	public static GagDAO instance;
+	private static GagDAO instance;
 	private	Connection conn = DBManager.getInstance().getConnection();
 	
 	private GagDAO () {
@@ -34,6 +34,8 @@ public class GagDAO {
 		return instance;
 	}
 	
+	
+
 
 	public synchronized Set<Gag> getAllGags() {
 		
@@ -129,22 +131,11 @@ public class GagDAO {
 		return Collections.unmodifiableSet(categories);
 	}
 	
-	public void addCommentToGag(Comment c) {
-		Gag gagTemp = null;
-		try {
-			for(Gag gag : UserDAO.getInstance().getAllUsers().get(UserDAO.getInstance().getUserEmail(c.getUserId())).getGags()) {
-				if(gag.getGagID() == c.getGagId()) {
-					gagTemp = gag;
-					break;
-				}	
-			}
-			gagTemp.addComment(c);
-		} catch (SQLException e) {
-			System.out.println("Comment not added to gag");
-		}
-	}
+
+	// това е грешно :D 
 	
 	public void deleteComment(Comment c) {
+		
 		Gag gagTemp = null;
 		try {
 			for(Gag gag : UserDAO.getInstance().getAllUsers().get(UserDAO.getInstance().getUserEmail(c.getUserId())).getGags()) {
@@ -160,5 +151,13 @@ public class GagDAO {
 	}
 	
 	
+	public Gag getGagById(long gagId){
+		for(Gag gag : allGags){
+			if(gag.getGagID() == gagId)
+				return gag;
+		}
+		return null;
+		
+	}
 	
 }

@@ -48,7 +48,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'gg','123','gabii2@abv.bg',1,'wwww','female','1994-12-01','dsfsdf',0,1,'123'),(2,'jess','123','jevgenieva@gmail.com',0,'ddsf','female','1991-12-02','jkhjkh',0,1,'2589'),(3,'gggg','1234','g',0,'fffffffff','male','1995-01-02','fdsfs',0,0,'55555'),(6,'gggccxg','1234','gxcxz',0,'fffffffff','male','1995-01-02','fdsfs',0,0,'55555'),(7,'dfsdfsd','123','gabrie',0,'..\\WebContent\\siteImages\\defaultProfilePic.jpg','Unspecified','1916-01-01','My funny collection',0,0,'7820f01c-d56a-4722-a1e0-4da1686b8e52'),(17,'gabi','123','gabriella.apostolova@gmail.com',0,'..\\WebContent\\siteImages\\defaultProfilePic.jpg','Unspecified','1916-01-01','My funny collection',0,1,'6c3cdc4f-41e7-4f08-a09d-db33718eb1b7'),(20,'sfdsfs','123','zixin_@abv.bg',0,'..\\WebContent\\siteImages\\defaultProfilePic.jpg','Unspecified','1916-01-01','My funny collection',0,1,'21ce2c65-191b-4a4e-8d40-15de31033a24'),(22,'gabrislava','123','ittalents.gj@gmail.com',0,'..\\WebContent\\siteImages\\defaultProfilePic.jpg','Unspecified','1916-01-01','My funny collection',0,1,'63b59d6c-4a88-4584-953c-e6fdf05139fa');
+INSERT INTO `users` VALUES (1,'gg','123','gabii2@abv.bg',1,'wwww','female','1994-12-01','dsfsdf',0,1,'123'),(2,'jess','123','jevgenieva@gmail.com',0,'ddsf','female','1991-12-02','jkhjkh',0,1,'2589'),(3,'gabi','123','gabriella.apostolova@gmail.com',0,'..\\WebContent\\siteImages\\defaultProfilePic.jpg','Unspecified','1916-01-01','My funny collection',0,1,'6c3cdc4f-41e7-4f08-a09d-db33718eb1b7'),(4,'sfdsfs','123','zixin_@abv.bg',0,'..\\WebContent\\siteImages\\defaultProfilePic.jpg','Unspecified','1916-01-01','My funny collection',0,1,'21ce2c65-191b-4a4e-8d40-15de31033a24'),(5,'gabrislava','123','ittalents.gj@gmail.com',0,'..\\WebContent\\siteImages\\defaultProfilePic.jpg','Unspecified','1916-01-01','My funny collection',0,1,'63b59d6c-4a88-4584-953c-e6fdf05139fa');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -61,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-12 13:34:36
+-- Dump completed on 2017-04-12 16:01:16

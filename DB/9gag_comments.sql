@@ -33,9 +33,10 @@ CREATE TABLE `comments` (
   PRIMARY KEY (`comment_id`),
   UNIQUE KEY `comment_id_UNIQUE` (`comment_id`),
   KEY `fk_comments_users1_idx` (`user_id`),
-  CONSTRAINT `fk_comments_gags1` FOREIGN KEY (`user_id`) REFERENCES `gags` (`gag_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  KEY `fk_comments_gags1_idx` (`gag_id`),
+  CONSTRAINT `fk_comments_gags1` FOREIGN KEY (`gag_id`) REFERENCES `gags` (`gag_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_comments_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +45,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (1,'2017-01-12 14:58:12','this cat sux',NULL,4,1,1),(2,'2017-01-12 14:58:59','this cat really sux',1,12,1,1),(3,'2017-04-12 13:33:17','Ne e smeshnichko',0,0,2,18);
+INSERT INTO `comments` VALUES (1,'2017-01-12 14:58:12','this cat sux',0,4,1,1),(2,'2017-01-12 14:58:59','this cat really sux',1,12,1,1),(3,'2017-04-12 13:33:17','Ne e smeshnichko',0,0,5,10),(14,'2017-04-12 15:55:52','....Posleden opit, basi....',0,0,5,10),(15,'2017-04-12 15:57:34','....Ma mnogo HOT, basi....',0,0,5,7);
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-12 13:34:36
+-- Dump completed on 2017-04-12 16:01:17

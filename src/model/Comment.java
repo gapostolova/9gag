@@ -18,7 +18,7 @@ public class Comment implements Comparable<Comment> {
 	private int upvotes;
 	
 	//?? private TreeSet<Comment> replies;
-	
+	//				komentirasht, gag, commentara
 	public Comment(long userId, long gagId, long commentId, LocalDateTime date, String content, long motherCommentId) {
 		super();
 		this.userId = userId;
@@ -52,20 +52,21 @@ public class Comment implements Comparable<Comment> {
 	@Override
 	public String toString() {
 		return "Comment [userId=" + userId + ", gagId=" + gagId + ", commentId=" + commentId + ", date=" + date
-				+ ", content=" + content + ", motherCommentId=" + motherCommentId + ", upvotes=" + upvotes + "]";
+				+ ", content=" + content + ", motherCommentId=" + motherCommentId + ", upvotes=" + upvotes + "]\n";
 	}
 	
-	public String getUserEmail() throws SQLException {
-		String email = null;
-		for(User u : UserDAO.getInstance().getAllUsers().values()) {
-			if(this.userId == u.getUserId()) {
-				email = u.getEmail();
-				break;
-			}
-		}
-		 return email;	
-	}
-	
+//  this returns user email of the person that makes the comment
+//	public String getUserEmail() throws SQLException {
+//		String email = null;
+//		for(User u : UserDAO.getInstance().getAllUsers().values()) {
+//			if(this.userId == u.getUserId()) {
+//				email = u.getEmail();
+//				break;
+//			}
+//		}
+//		 return email;	
+//	}
+//	
 	public long getGagId() {
 		return this.gagId;
 	}
