@@ -69,14 +69,17 @@ public class CommentDAO {
 	}
 	
 	
-	//it should delete the comment and all of the comments that this comment is motherComment of
+	//working comment deletion
 	public synchronized void deleteComment(Comment c) throws SQLException {
 		try {
+			//get all comments that have this comment id as their mother comment
 			
-			String sql = "DELETE FROM `9gag`.`comments` WHERE `comment_id`='?';";
+			String sql = "DELETE FROM `9gag`.`comments` WHERE `comment_id`=? OR mothership_id=?;";
 			PreparedStatement pst = conn.prepareStatement(sql);
 
 			pst.setLong(1, c.getCommentId());
+			pst.setLong(2, c.getCommentId());
+			
 			pst.executeUpdate();
 			
 			//delete comment from gag
@@ -84,9 +87,8 @@ public class CommentDAO {
 			
 			} catch (SQLException e) {
 				System.out.println("Could not delete comment in deleteComment in CommentDAO: " + e.getMessage());
-				throw new SQLException("Error upvoting!");
+				throw new SQLException(e.getMessage());
 			}
-		
 	}
 	
 	public synchronized void rateComment(Comment c, int point) throws SQLException {
@@ -107,8 +109,23 @@ public class CommentDAO {
 		} catch (SQLException e) {
 			System.out.println("Error upvoting!");
 			throw new SQLException("Error upvoting!");
-		}
+		}	
+	}
+	
+	//delete all comments form a gag (when deleting a gag)
+	public synchronized void deleteGagComments(Gag gag) throws SQLException {
 		
-
+		try {
+			String sql = "DELETE FROM `9gag`.`comments` WHERE `gag_id`=? ;";
+			PreparedStatement pst = conn.prepareStatement(sql);
+	
+			pst.setLong(1, gag.getGagID());
+			
+			pst.executeUpdate();
+		
+		} catch (SQLException e) {
+			System.out.println("Could not delete comments in for a gag in CommentDAO: " + e.getMessage());
+			throw new SQLException(e.getMessage());
+		}
 	}
 }

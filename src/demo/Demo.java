@@ -85,6 +85,21 @@ public class Demo {
 //	System.out.println("=====================		USERS		======================\n");
 ////	
 //	System.out.println(useri);
+//		Comment c = null;
+//		for(Comment com : CommentDAO.allComments) {
+//			if(com.getCommentId() == 3)
+//				c = com;
+//		}
+//		System.out.println(c);
+//		CommentDAO.getInstance().deleteComment(c);
+		
+//		GagDAO.getInstance().getAllGags();
+//		Gag gag = null;
+//		for(Gag g : GagDAO.getInstance().allGags) {
+//			if(g.getGagID() == 2)
+//				gag = g;
+//		}
+//		GagDAO.getInstance().deleteGag(gag);
 	
 	}
 
