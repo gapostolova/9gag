@@ -129,10 +129,7 @@ public class GagDAO {
 			}
 		}
 		return Collections.unmodifiableSet(categories);
-	}
-	
-
-	// това е грешно :D 
+	} 
 	
 	public void deleteComment(Comment c) {
 		
@@ -157,6 +154,32 @@ public class GagDAO {
 				return gag;
 		}
 		return null;
+		
+	}
+	
+	//working and tested - deletes gag, deletes all comments assosiated with it
+	public synchronized void deleteGag(Gag gag) throws SQLException {
+		try {
+			//delete comments assosiated with this gag
+			CommentDAO.getInstance().deleteGagComments(gag);
+			
+			//delete from collection
+			
+			gag.deleteAllComments();
+			
+			//delete gag
+			
+			String sql = "DELETE FROM 9gag.gags WHERE gag_id=?;";
+			PreparedStatement pst = conn.prepareStatement(sql);
+
+			pst.setLong(1, gag.getGagID());
+			
+			pst.executeUpdate();
+			
+			} catch (SQLException e) {
+				System.out.println("Could not delete gag in GagDAO: " + e.getMessage());
+				throw new SQLException(e.getMessage());
+			}
 		
 	}
 	

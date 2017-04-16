@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.TreeSet;
 
 public class Gag implements Comparable<Gag> {
@@ -152,6 +153,15 @@ public class Gag implements Comparable<Gag> {
 	}
 	
 	public void deleteComment(Comment comment) {
+		Iterator<Comment> it = this.comments.iterator();
+		while(it.hasNext()) {
+			if(it.next().getMotherCommentId() == comment.getCommentId())
+				it.remove();
+		}
 		this.comments.remove(comment);
+	}
+	
+	public void deleteAllComments() {
+		this.comments = null;
 	}
 }
