@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.TreeSet;
@@ -163,5 +164,9 @@ public class Gag implements Comparable<Gag> {
 	
 	public void deleteAllComments() {
 		this.comments = null;
+	}
+	
+	public String getFullName() {
+		return this.gag + "." + this.type;
 	}
 }
